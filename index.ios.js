@@ -4,35 +4,34 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
+ import React, { Component } from 'react';
+
+ import {
+ 	AppRegistry,
   Navigator
-} from 'react-native';
+ } from 'react-native';
 
-import LoginScreen from './LoginScreen';
+ import LoginScreen from './LoginScreen';
+ import HomeScreen from './Home';
 
-export default class PlayTT extends Component {
-  render() {
+
+ export default class PlayTT extends Component {
+   render() {
     return (
-            <Navigator
-            initialRoute={{ title: 'Login Screen', index: 0 }}
-            renderScene={(route, navigator) => {
-            return <LoginScreen />
-            }}
-            />
-            
-    );
+      <Navigator
+        initialRoute={{ id: 'Login'}}
+        renderScene={ this.renderScene } />
+      )
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
+  renderScene(route, navigator) {
+     if(route.id == 'Login') {
+       return <LoginScreen navigator={navigator} {...route.passProps} />
+     }
+     if(route.id == 'Home') {
+       return <HomeScreen navigator={navigator} {...route.passProps} />
+     }
   }
-});
+ }
 
-AppRegistry.registerComponent('PlayTT', () => PlayTT);
+ AppRegistry.registerComponent('PlayTT', () => PlayTT);

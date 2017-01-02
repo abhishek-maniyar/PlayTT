@@ -7,6 +7,8 @@ import {
   Navigator,
   Image
  } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -15,6 +17,7 @@ export default class LoginScreen extends Component {
     }
 
     render() {
+
         return (
           <View style={{flex: 1, padding: 10, backgroundColor:'#ac7139'}}>
           <TextInput
@@ -36,13 +39,7 @@ export default class LoginScreen extends Component {
     }
 
     signIn() {
-        //Alert.alert('SignIn button has been pressed! '+this.state.userName);
-        this.props.navigator.push({
-        id: 'Home',
-        passProps: {
-        userName: this.state.userName
-        }
-      })
+        Actions.HomeScreen({text: 'Home'});
     };
 
 

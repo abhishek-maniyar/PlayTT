@@ -5,49 +5,37 @@
  */
 
 import React, { Component } from 'react';
+
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    Navigator
 } from 'react-native';
 
-export default class PlayTT extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import { Router, Scene } from 'react-native-router-flux';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+import LoginScreen from './LoginScreen';
+import HomeScreen from './Home';
+
+export default class PlayTT extends Component {
+    render() {
+        return (
+            <Router>
+                <Scene key="root">
+                    <Scene key="LoginScreen"
+                           hideNavBar={true}
+                           component={LoginScreen}
+                           title="LoginScreen" initial={true}
+                    />
+
+                    <Scene key="HomeScreen" hideNavBar={false}
+                           component={HomeScreen}
+                           title="Play"
+                           sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight-20}}
+                    />
+                </Scene>
+            </Router>
+        );
+    }
+}
 
 AppRegistry.registerComponent('PlayTT', () => PlayTT);

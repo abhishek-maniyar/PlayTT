@@ -4,34 +4,38 @@
  * @flow
  */
 
- import React, { Component } from 'react';
+import React, { Component } from 'react';
 
- import {
- 	AppRegistry,
-  Navigator
- } from 'react-native';
+import {
+    AppRegistry,
+    Navigator
+} from 'react-native';
 
- import LoginScreen from './LoginScreen';
- import HomeScreen from './Home';
+import { Router, Scene } from 'react-native-router-flux';
 
+import LoginScreen from './LoginScreen';
+import HomeScreen from './Home';
 
- export default class PlayTT extends Component {
-   render() {
-    return (
-      <Navigator
-        initialRoute={{ id: 'Login'}}
-        renderScene={ this.renderScene } />
-      )
-  }
+export default class PlayTT extends Component {
+    render() {
+        return (
+            <Router>
+                <Scene key="root">
+                    <Scene key="LoginScreen"
+                           hideNavBar={true}
+                           component={LoginScreen}
+                           title="LoginScreen" initial={true}
+                    />
 
-  renderScene(route, navigator) {
-     if(route.id == 'Login') {
-       return <LoginScreen navigator={navigator} {...route.passProps} />
-     }
-     if(route.id == 'Home') {
-       return <HomeScreen navigator={navigator} {...route.passProps} />
-     }
-  }
- }
+                    <Scene key="HomeScreen" hideNavBar={false}
+                           component={HomeScreen}
+                           title="Play"
+                           sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight-20}}
+                    />
+                </Scene>
+            </Router>
+        );
+    }
+}
 
- AppRegistry.registerComponent('PlayTT', () => PlayTT);
+AppRegistry.registerComponent('PlayTT', () => PlayTT);
